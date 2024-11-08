@@ -1,0 +1,72 @@
+/* Estilos generales */
+body {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.08);
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+/* Cards */
+.card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+    margin-bottom: 1.5rem;
+}
+/* Estilos para el navbar */
+.navbar {
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,.08);
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+.navbar .nav-link {
+    padding: 0.5rem 1rem;
+    color: #4a5568;
+}
+
+.navbar .nav-link:hover {
+    color: #2d3748;
+}
+
+.navbar .dropdown-menu {
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+    border: 1px solid rgba(0,0,0,.08);
+}
+
+.navbar .dropdown-item {
+    padding: 0.5rem 1.5rem;
+}
+
+.navbar .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Ajuste para el contenido principal */
+.container-fluid {
+    padding-top: 1rem;
+}
+
+/* Estilos para los iconos en el navbar */
+.navbar .bi {
+    font-size: 1.1rem;
+    vertical-align: -0.125em;
+}
+
+/* Estilos para el dropdown de usuario */
+.navbar .dropdown-item.text-muted {
+    cursor: default;
+}
+
+.navbar .dropdown-item.text-muted:hover {
+    background: none;
+}
