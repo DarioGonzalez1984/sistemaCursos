@@ -28,17 +28,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_id'])) {
 // Obtener lista de cursos con estadísticas
 try {
     $stmt = $conn->query("
-        SELECT c.*, 
-               COUNT(DISTINCT e.id) as total_ediciones,
-               COUNT(DISTINCT i.id) as total_inscripciones,
-               MIN(e.fecha_inicio) as proxima_edicion
+        SELECT 
+            c.*,
+            (SELECT COUNT(*) 
+             FROM ediciones 
+             WHERE curso_id = c.id) as total_ediciones,
+            (SELECT COUNT(*) 
+             FROM ediciones e 
+             JOIN inscripciones i ON e.id = i.edicion_id 
+             WHERE e.curso_id = c.id) as total_inscripciones,
+            (SELECT MIN(fecha_inicio) 
+             FROM ediciones 
+             WHERE curso_id = c.id 
+             AND fecha_inicio >= CURRENT_DATE()) as proxima_edicion
         FROM cursos c
-        LEFT JOIN ediciones e ON c.id = e.curso_id AND e.fecha_inicio >= CURDATE()
-        LEFT JOIN inscripciones i ON e.id = i.edicion_id
-        GROUP BY c.id
         ORDER BY c.nombre
     ");
     $cursos = $stmt->fetchAll();
+// try {
+//     $stmt = $conn->query("
+//         SELECT c.*, 
+//                COUNT(DISTINCT e.id) as total_ediciones,
+//                COUNT(DISTINCT i.id) as total_inscripciones,
+//                MIN(e.fecha_inicio) as proxima_edicion
+//         FROM cursos c
+//         LEFT JOIN ediciones e ON c.id = e.curso_id AND e.fecha_inicio >= CURDATE()
+//         LEFT JOIN inscripciones i ON e.id = i.edicion_id
+//         GROUP BY c.id
+//         ORDER BY c.nombre
+//     ");
+//     $cursos = $stmt->fetchAll();
 } catch(PDOException $e) {
     $error = 'Error al obtener los cursos';
     $cursos = [];
